@@ -3,6 +3,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import os
 import spotipy
 
+##Load the .env file, which contains the client id and client secret of the spotify developer account
 load_dotenv()
 
 ##Get the client id and client secret from the .env file
@@ -15,9 +16,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id,
                                                redirect_uri="http://localhost:8888/callback",
                                                scope="user-library-read"))
 
-##Initialize the offset to 0
-first_offset = 0
-i= 1
+##Initialize the offset to 0 and a song counter to 1
+first_offset = 0;i= 1
 
 ##Inizialice an empty list to store the song ids
 song_ids = list()
@@ -27,8 +27,6 @@ while True:
     results = sp.current_user_saved_tracks(limit=50, offset=first_offset)  
     song_ids.extend([item['track']['id'] for item in results['items']])
     
-    
-
     ##Print the first 50 saved songs 
     for item in results['items']:
         track = item['track']
