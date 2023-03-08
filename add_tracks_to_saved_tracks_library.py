@@ -10,14 +10,36 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
+scopes = [
+  'ugc-image-upload',
+  'user-read-playback-state',
+  'user-modify-playback-state',
+  'user-read-currently-playing',
+  'streaming',
+  'app-remote-control',
+  'user-read-email',
+  'user-read-private',
+  'playlist-read-collaborative',
+  'playlist-modify-public',
+  'playlist-read-private',
+  'playlist-modify-private',
+  'user-library-modify',
+  'user-library-read',
+  'user-top-read',
+  'user-read-playback-position',
+  'user-read-recently-played',
+  'user-follow-read',
+  'user-follow-modify'
+]
+
 ##Initialize the spotipy object, verify the scope and redirect uri
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id,
                                                client_secret,
                                                redirect_uri="http://localhost:8888/callback",
-                                               scope="user-library-modify"))
+                                               scope=scopes,))
 
 
-tracking = ['spotify:track:6DXLO8LndZMVOHM0wNbpzg']
+tracking = ['6DXLO8LndZMVOHM0wNbpzg','0oks4FnzhNp5QPTZtoet7c']
 
 results = sp.current_user_saved_tracks_add(tracks=tracking)
 

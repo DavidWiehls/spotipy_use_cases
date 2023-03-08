@@ -1,3 +1,4 @@
+##Import the necessary libraries
 from dotenv import load_dotenv
 from spotipy.oauth2 import SpotifyOAuth
 import os
@@ -10,11 +11,13 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
+
+
 ##Initialize the spotipy object, verify the scope and redirect uri
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id,
-                                               client_secret,
-                                               redirect_uri="http://localhost:8888/callback",
-                                               scope="user-library-read"))
+                                            client_secret,
+                                            redirect_uri="http://localhost:8888/callback",
+                                            scope="user-library-read"))
 
 ##Initialize the offset to 0 and a song counter to 1
 first_offset = 0;i= 1
@@ -41,8 +44,3 @@ while True:
     if len(results['items']) == 50:
         first_offset = first_offset + 50 
     else: break   
-
-
-
-
-
